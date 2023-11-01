@@ -67,7 +67,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 Adds a seller with their info to the list.
 
-Format: `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]`
+Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [t/TAG]`
 - `n/NAME`: String
 - `p/PHONE_NUMBER`: int
 - `e/EMAIL`: String contains ‘@’
@@ -93,18 +93,22 @@ Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor 
 
 Precise outputs when the command fails due to invalid parameters:
 ```
-Phone numbers should only contain numbers, and it should be at least 3 digits long
+Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
+Please ignore if this is expected.
 ```
 ```
-Emails should be of the format local-part@domain and adhere to the following constraints:
+Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
+Please ignore if this is expected.
 ```
-
+```
+Emails must contain at least one '@'.
+```
 
 
 
@@ -113,7 +117,7 @@ The domain name must:
 
 Adds a buyer with their info to the list.
 
-Format: `buyer n/NAME p/PHONE\_NUMBER e/EMAIL ah/HOME\_ADDRESS i/BUY\_HOUSE\_INFO \[t/TAG]`
+Format: `buyer n/NAME [p/PHONE\_NUMBER] [e/EMAIL] [ah/HOME\_ADDRESS] [i/BUY\_HOUSE\_INFO] \[t/TAG]`
 
 - `n/NAME`: String
 - `p/PHONE\_NUMBER`: int
@@ -141,46 +145,63 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2,
 
 Precise outputs when the command fails due to invalid parameters:
 ```
-Phone numbers should only contain numbers, and it should be at least 3 digits long
+Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
+Please ignore if this is expected.
 ```
 ```
-Emails should be of the format local-part@domain and adhere to the following constraints:
+Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
+Please ignore if this is expected.
+```
+```
+Emails must contain at least one '@'.
 ```
 
+### Listing all buyers and sellers: `list`
 
-### Listing all buyers: `list-b`
+Lists all buyers and sellers that the user has added. Buyers and sellers are stored in separate lists for easier differentiation and handling of contacts.
 
-Lists only all buyers that the user has added. Buyers and sellers are stored in separate lists for easier differentiation and handling of contacts.
-
-Format: `list-b`
-
-Precise outputs when the command succeeds:
-
-```Here are all your buyers:
-1. Ryan 91234567 <ryan@gmail.com> 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
-2. Ian Tsai 91234567 <iantsai@gmail.com> 1 College Ave East Central Area 5 Room Condominium
-```
-
-
-### Listing all sellers: `list-s`
-
-Lists only all sellers that the user has added.
-
-Format: `list-s`
+Format: `list`
 
 Precise outputs when the command succeeds:
 
 ```
-Here are all your sellers:
-1. Albert 91234567 albert[@gmail.com](mailto:ryan@gmail.com) My Secret Home 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
-2. Bob 91234567 bob[@gmail.com](mailto:iantsai@gmail.com) Secret Home 2 1 College Ave East Central Area 5 Room Condominium
+Listed all buyers and sellers!
 ```
+
+
+### Listing all buyers: `listb`
+
+Displays the information of a buyer based on their index number in the buyers' list.
+
+Format: `listb INDEX`
+
+Precise outputs when the command succeeds:
+
+```
+Got it. Here's the information of this buyer:
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+```
+
+
+### Listing all buyers: `lists`
+
+Displays the information of a seller based on their index number in the sellers' list.
+
+Format: `lists INDEX`
+
+Precise outputs when the command succeeds:
+
+```
+Got it. Here's the information of this seller:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+```
+
 
 ### Filter buyers and sellers: `filter`
 
@@ -196,19 +217,19 @@ Precise outputs when the command succeeds:
 1 buyer(s) and 0 seller(s) listed!
 ```
 
-### Deleting a buyer: `delete-b`
+### Deleting a buyer: `deleteb`
 
 Deletes a buyer based on their index number in the buyers’ list.
 
-Format: `delete-b INDEX`
+Format: `deleteb INDEX`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
 
-Example: `delete-b 3`
+Example: `deleteb 3`
 
 Precise outputs when the command succeeds:
 ```
 Got it. I’ve deleted a buyer contact:
-Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Buying Info: 5 Room Condominium; Tags:
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 ```
 
 Precise outputs when the command fails:
@@ -216,38 +237,49 @@ Precise outputs when the command fails:
 Invalid command format!
 delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
 Parameters: INDEX (must be a positive integer)
-Example: delete-b 1
+Example: deleteb 1
 ```
 ```
 The buyer index provided is higher than the last number in the list!
 ```
 
 
-### Deleting a buyer: `delete-s`
+### Deleting a buyer: `deletes`
 
 Deletes a seller based on their index number in the sellers’ list.
 
-Format: `delete-s INDEX`
+Format: `deletes INDEX`
 * `INDEX`: A positive integer (1,2,3 …), which must not exceed last index in the sellers’ list
 
-Example: `delete-s 3`
+Example: `deletes 3`
 
 Precise outputs when the command succeeds:
 ```
 Got it. I’ve deleted a seller contact:
-Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Selling Address: 311, Clementi Ave 2, #02-25; Selling Info: 5 Room Condominium; Tags:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
 ```
 Precise outputs when the command fails:
 ```
 Invalid command format!
-delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
+deleteb: Deletes the buyer identified by the index number used in the displayed buyer list.
 Parameters: INDEX (must be a positive integer)
-Example: delete-b 1
+Example: deleteb 1
 ```
 ```
 The buyer index provided is higher than the last number in the list!
 ```
 
+### Undo: `undo`
+
+Undoes the previous action.
+
+Format: `undo`
+
+### Redo: `redo`
+
+Restores the previously undone action.
+
+Format :`redo`
 
 ### Exiting the program: `exit`
 
@@ -309,8 +341,11 @@ Action     | Format, Examples
 **Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
 **Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
 **Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List Sellers**   | `list-s`
-**List Buyers**   | `list-b`
+**List All** | `list`
+**List Seller**   | `lists`
+**List Buyer**   | `listb`
+**Undo**   | `undo`
+**Redo**  | `redo`
 **Exit**   | `exit`
 **Help**   | `help`
 
