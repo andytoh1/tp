@@ -133,8 +133,8 @@
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "setting-a-buyer-s-priority-bprio": "Setting a buyer's priority: bprio",
         "setting-a-seller-s-priority-sprio": "Setting a seller's priority: sprio",
-        "listing-all-buyers-and-sellers-list": "Listing all buyers and sellers: list",
         "filtering-buyers-and-sellers-filter": "Filtering buyers and sellers: filter",
+        "listing-all-buyers-and-sellers-list": "Listing all buyers and sellers: list",
         "displaying-a-buyer-from-buyer-list-blist": "Displaying a buyer from buyer list: blist",
         "displaying-a-seller-from-seller-list-slist": "Displaying a seller from seller list: slist",
         "sorting-buyers-bsort": "Sorting buyers: bsort",
@@ -185,10 +185,10 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
+      "src": "team/peasantbird.md",
+      "title": "Bertrand's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-realtortrackerplusmax": "Project: RealtorTrackerPlusMax"
       },
       "headingKeywords": {}
     },
